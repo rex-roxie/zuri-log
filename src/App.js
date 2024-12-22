@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard';
 import SignIn from './features/login/SignIn';
 import ProtectedRoute from './features/login/ProtectedRoute';
 import { AuthProvider } from './features/login/AuthProvider';
+import DriverInfo from './features/drivers/DriverInfo';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path='/' element={<SignIn />} />
         <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path='/driverinfo/:id' element={<ProtectedRoute><DriverInfo /></ProtectedRoute>} />
       </Routes>
       <AuthProvider />
     </div>

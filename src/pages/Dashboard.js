@@ -34,7 +34,9 @@ function Dashboard() {
       <button onClick={logout}>Logout</button>
       <section>
         {drivers.map((driver) => {
-          return <p>{driver.first_name}</p>
+          return <p onClick={() => {
+            navigate(`/driverinfo/${driver.id}`)
+          }}>{driver.first_name}</p>
         })}
       </section>
       

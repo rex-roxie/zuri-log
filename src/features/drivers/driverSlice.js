@@ -31,8 +31,8 @@ const driverSlice = createSlice({
   },
 });
 
-export const {login, logout} = userSlice.actions;
+export const {login, logout} = driverSlice.actions;
 
-export const selectUser = (state) => state.user.value;
+export const selectDriver = (state) => state.user.value;
 
-export default userSlice.reducer;
+export default driverSlice.reducer;
