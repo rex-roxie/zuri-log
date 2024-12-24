@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { collection, getDocs, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
 
@@ -15,6 +15,9 @@ const titleCase = (str) => {
 function DriverInfo() {
   const [initialDriverInfo, setInitialDriverInfo] = useState({});
   const [driver, setDriver] = useState({});
+  const [driverEditForm, setDriverEditForm] = useState('block');
+  const [deleteDriverForm, setDeleteDriverForm] = useState('none');
+
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -46,7 +49,26 @@ function DriverInfo() {
     return citizenshipOptions;
   }
 
+  const checkCertification = () => {
+    let certificationOptions = [];
+    switch(driver.certification) {
+      case 'Tanker Endorsement':
+        certificationOptions = ['Hazard', 'Both', 'Neither'];
+        break;
+      case 'Both':
+        certificationOptions = ['Hazard', 'Tanker Endorsement', 'Neither'];
+        break;  
+      case 'Neither':
+        citizenOptions = ['Hazard', 'Tanker Endorsement', 'Both']
+      default:
+        certificationOptions = ['Tanker Endorsement', 'Both', 'Neither'];
+    }
+
+    return certificationOptions;
+  }
+
   let citizenOptions = checkCitizenship();
+  let certificationOptions = checkCertification();
 
   const handleChange = (event) => {
     const {name, value} = event.target;
@@ -84,56 +106,88 @@ function DriverInfo() {
     navigate('/dashboard');
   }
 
+  const deleteConfirmation = (event) => {
+    event.preventDefault();
+    setDriverEditForm('none');
+    setDeleteDriverForm('block');
+  }
+
+  const cancelDeletion = () => {
+    setDriverEditForm('block');
+    setDeleteDriverForm('none');
+  }
+
+  const deleteDriver = async () => {
+    console.log("Deleting Driver...");
+    await deleteDoc(docRef).then(() => {
+      console.log("Driver was deleted")
+      navigate('/dashboard');
+    })
+  }
+
   return (
     <div>
-      <h2>{driver.first_name} {driver.last_name}</h2>
-      <form onSubmit={editDriver}>
-        <ul>
-          <li>
-            <label>Email: </label>
-            <input name='email' type='email' value={driver.email} onChange={handleChange}/>
-          </li>
-          <li>
-            <label>Phone: </label>
-            <input name='phone' type='number' value={driver.phone} onChange={handleChange} />
-          </li>
-          <li>
-            <label>Medical Card Number: </label>
-            <input name='medical_card_number' type='number' value={driver.medical_card_number} onChange={handleChange} />
-          </li>
-          <li>
-            <label>Medical Card Expiry Date: </label>
-            <input name='medical_card_expiry_date' type='text' value={driver.medical_card_expiry_date} onChange={handleChange} />
-          </li>
-          <li>
-            <label>Truck Number: </label>
-            <input name='truck_number' type='number' value={driver.truck_number} onChange={handleChange} />
-          </li>
-          <li>
-            <label>Driver License Number: </label>
-            <input name='driver_license_numbers' type='number' value={driver.driver_license_numbers} onChange={handleChange} />
-          </li>
-          <li>
-            <label>Driver License Expiry Date: </label>
-            <input name='driver_license_expiry_date' type='text' value={driver.driver_license_expiry_date} onChange={handleChange} />
-          </li>
-          <li>
-            <label>Certification: </label>
-            <input name='certification' type='text' value={driver.certification} onChange={handleChange} />
-          </li>
-          <li>
-            <label>Citizenship: </label>
-            {/* <input defaultValue={driver.citizenship} onChange={(event) => {setCitizenship(event.target.value)}} /> */}
-            <select name="citizenship" onChange={handleChange}>
-              <option selected={driver.citizenship}>{titleCase(driver.citizenship)}</option>
-              <option>{citizenOptions[0]}</option>
-              <option>{citizenOptions[1]}</option>
-            </select>
-          </li>
-        </ul>
-        <button type='submit' onClick={editDriver}>Edit Driver</button>
-        <button type='button' onClick={cancel}>Cancel</button>
-      </form>
+      <section style={{display: driverEditForm}}>
+        <h2>{driver.first_name} {driver.last_name}</h2>
+        <form onSubmit={editDriver}>
+          <ul>
+            <li>
+              <label>Email: </label>
+              <input name='email' type='email' value={driver.email} onChange={handleChange}/>
+            </li>
+            <li>
+              <label>Phone: </label>
+              <input name='phone' type='number' value={driver.phone} onChange={handleChange} />
+            </li>
+            <li>
+              <label>Medical Card Number: </label>
+              <input name='medical_card_number' type='number' value={driver.medical_card_number} onChange={handleChange} />
+            </li>
+            <li>
+              <label>Medical Card Expiry Date: </label>
+              <input name='medical_card_expiry_date' type='text' value={driver.medical_card_expiry_date} onChange={handleChange} />
+            </li>
+            <li>
+              <label>Truck Number: </label>
+              <input name='truck_number' type='number' value={driver.truck_number} onChange={handleChange} />
+            </li>
+            <li>
+              <label>Driver License Number: </label>
+              <input name='driver_license_numbers' type='number' value={driver.driver_license_numbers} onChange={handleChange} />
+            </li>
+            <li>
+              <label>Driver License Expiry Date: </label>
+              <input name='driver_license_expiry_date' type='text' value={driver.driver_license_expiry_date} onChange={handleChange} />
+            </li>
+            <li>
+              <label>Certification: </label>
+              <select name="certification" onChange={handleChange}>
+                <option selected={driver.certification}>{titleCase(driver.certification)}</option>
+                <option>{certificationOptions[0]}</option>
+                <option>{certificationOptions[1]}</option>
+                <option>{certificationOptions[2]}</option>
+              </select>
+            </li>
+            <li>
+              <label>Citizenship: </label>
+              {/* <input defaultValue={driver.citizenship} onChange={(event) => {setCitizenship(event.target.value)}} /> */}
+              <select name="citizenship" onChange={handleChange}>
+                <option selected={driver.citizenship}>{titleCase(driver.citizenship)}</option>
+                <option>{citizenOptions[0]}</option>
+                <option>{citizenOptions[1]}</option>
+              </select>
+            </li>
+          </ul>
+          <button type='submit' onClick={editDriver}>Edit Driver</button>
+          <button type='button' onClick={cancel}>Cancel</button>
+          <button type='button' onClick={deleteConfirmation}>Delete Driver</button>
+        </form>
+      </section>
+      <section style={{display: deleteDriverForm}}>
+        <h2>Are you sure you want to delete the driver?</h2>
+        <button onClick={deleteDriver}>Yes</button>
+        <button onClick={cancelDeletion}>No</button>
+      </section>
     </div>
   )
 }

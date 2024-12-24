@@ -7,6 +7,7 @@ import SignIn from './features/login/SignIn';
 import ProtectedRoute from './features/login/ProtectedRoute';
 import { AuthProvider } from './features/login/AuthProvider';
 import DriverInfo from './features/drivers/DriverInfo';
+import AddDriver from './features/drivers/AddDriver';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<SignIn />} />
         <Route path='/dashboard' element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path='/driverinfo/:id' element={<ProtectedRoute><DriverInfo /></ProtectedRoute>} />
+        <Route path='/addDriver' element={<ProtectedRoute><AddDriver /></ProtectedRoute>} />
       </Routes>
       <AuthProvider />
     </div>

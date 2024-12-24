@@ -39,6 +39,10 @@ function Dashboard() {
           }}>{driver.first_name}</p>
         })}
       </section>
+
+      <button onClick={() => {
+        navigate('/addDriver');
+      }}>Add Driver</button>
       
     </div>
     
