@@ -45,14 +45,14 @@ function Dashboard() {
         {drivers.map((driver) => {
           return <p onClick={() => {
             navigate(`/driverinfo/${driver.id}`)
-          }}>{driver.first_name}</p>
+          }} key={driver.id}>{driver.first_name}</p>
         })}
       </section>
       <section>
         {trucks.map((truck) => {
           return <p onClick={() => {
             navigate(`/truckinfo/${truck.id}`)
-          }}>{truck.truck_number}</p>
+          }} key={truck.id}>{truck.truck_number}</p>
         })}
       </section>
 

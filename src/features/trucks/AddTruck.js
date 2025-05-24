@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import Search from '../AssignDriver/Search';
 
 
 function AddTruck() {
@@ -46,6 +47,12 @@ function AddTruck() {
     setTruck(truck => ({...truck, [name]: value}));
   }
 
+  const handleDriverChange = (data) => {
+    console.log(data);
+    const name = 'driver_assigned_to';
+    setTruck(truck => ({...truck, [name]: data}));
+  }
+
   const cancel = (event) => {
     event.preventDefault();
     navigate('/dashboard');
@@ -62,7 +69,8 @@ function AddTruck() {
           </li>
           <li>
             <label>Driver Assigned To: </label>
-            <input name='driver_assigned_to' type='text' value={truck.driver_assigned_to} onChange={handleChange}/>
+            {/* <input name='driver_assigned_to' type='text' value={truck.driver_assigned_to} onChange={handleChange}/> */}
+            <Search onDriverChange={handleDriverChange} />
           </li>
           <li>
             <label>Registration Current Date: </label>
