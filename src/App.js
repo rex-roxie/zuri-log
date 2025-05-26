@@ -12,6 +12,8 @@ import AddTruck from './features/trucks/AddTruck';
 import TruckInfo from './features/trucks/TruckInfo';
 import TrailorInfo from './features/trailors/TrailorInfo';
 import AddTrailor from './features/trailors/AddTrailor';
+import AddLoad from './features/loads/AddLoad';
+import LoadInfo from './features/loads/LoadInfo';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
         <Route path='/addTruck' element={<ProtectedRoute><AddTruck /></ProtectedRoute>} />
         <Route path='/trailorinfo/:id' element={<ProtectedRoute><TrailorInfo /></ProtectedRoute>} />
         <Route path='/addTrailor' element={<ProtectedRoute><AddTrailor /></ProtectedRoute>} />
+        <Route path='/loadinfo/:id' element={<ProtectedRoute><LoadInfo /></ProtectedRoute>} />
+        <Route path='/addLoad' element={<ProtectedRoute><AddLoad /></ProtectedRoute>} />
       </Routes>
       <AuthProvider />
     </div>

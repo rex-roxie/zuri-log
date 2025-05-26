@@ -36,11 +36,19 @@ function Dashboard() {
     console.log(trailors)
   }
 
+  const getLoads = async () => {
+    const querySnapshot = await getDocs(collection(db, "loads"));
+    const loads = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
+    setLoads(loads);
+    console.log(loads);
+  }
+
   useEffect(() => {
     dispatch(login({name: auth.currentUser.displayName, email:auth.currentUser.email, uid: auth.currentUser.uid}))
     getDrivers();
     getTrucks();
     getTrailors();
+    getLoads();
   }, [])
 
   const logout = () => {
@@ -72,6 +80,13 @@ function Dashboard() {
           }} key={trailor.id}>{trailor.trailor_number}</p>
         })}
       </section>
+      <section>
+        {loads.map((load) => {
+          return <p onClick={() => {
+            navigate(`/loadinfo/${load.id}`)
+          }} key={load.id}>{load.load_number}</p>
+        })}
+      </section>
 
       <button onClick={() => {
         navigate('/addDriver');
@@ -84,6 +99,10 @@ function Dashboard() {
       <button onClick={() => {
         navigate('/addTrailor');
       }}>Add Trailor</button>
+
+      <button onClick={() => {
+        navigate('/addLoad');
+      }}>Add Load</button>
       
     </div>
     

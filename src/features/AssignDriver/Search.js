@@ -39,9 +39,8 @@ function Search({onDriverChange, value}) {
 
   return (
     <div>
-        <li>
-            <input name='driver_assigned_to' type='text' onChange={handleChange} value={value}/>
-        </li>
+        <input name='driver_assigned_to' type='text' onChange={handleChange} value={value || ''}/>
+        
         <section>
             {filteredList.map((x) => {
             return <p onClick={() => onDriverChange(x.first_name)} key={x.id}>{x.first_name}</p>
