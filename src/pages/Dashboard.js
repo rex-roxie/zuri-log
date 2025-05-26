@@ -80,6 +80,10 @@ function Dashboard() {
       <button onClick={() => {
         navigate('/addTruck');
       }}>Add Truck</button>
+
+      <button onClick={() => {
+        navigate('/addTrailor');
+      }}>Add Trailor</button>
       
     </div>
     

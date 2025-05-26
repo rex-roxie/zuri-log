@@ -3,6 +3,13 @@ import { db } from '../../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
+const titleCase = (str) => {
+  if (!str) return false;
+
+  return str.split(' ')
+  .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+  .join(' ');
+}
 
 function AddDriver() {
     const initialDriverInfo = {
@@ -59,6 +66,46 @@ function AddDriver() {
     navigate('/dashboard');
   }
 
+  const checkCitizenship = () => {
+    let citizenshipOptions = [];
+    switch(driver.citizenship) {
+      case 'Non Citizen':
+        citizenshipOptions = ['Citizen', 'Work Permit'];
+        break;
+      case 'Work Permit':
+        citizenshipOptions = ['Citizen', 'Non Citizen'];
+        break;  
+      default:
+        citizenshipOptions = ['Non Citizen', 'Work Permit'];
+        break;
+    }
+
+    return citizenshipOptions;
+  }
+
+  const checkCertification = () => {
+    let certificationOptions = [];
+    switch(driver.certification) {
+      case 'Tanker Endorsement':
+        certificationOptions = ['Hazard', 'Both', 'Neither'];
+        break;
+      case 'Both':
+        certificationOptions = ['Hazard', 'Tanker Endorsement', 'Neither'];
+        break;  
+      case 'Neither':
+        certificationOptions = ['Hazard', 'Tanker Endorsement', 'Both'];
+        break;
+      default:
+        certificationOptions = ['Tanker Endorsement', 'Both', 'Neither'];
+        break;
+    }
+
+    return certificationOptions;
+  }
+
+  let citizenOptions = checkCitizenship();
+  let certificationOptions = checkCertification();
+
   return (
     <div>
       <h2>Add Driver</h2>
@@ -103,18 +150,19 @@ function AddDriver() {
           <li>
             <label>Certification: </label>
             <select name="certification" onChange={handleChange}>
-            <option selected={driver.certification}>{driver.certification}</option>
-              <option>Tanker Endorsement</option>
-              <option>Both</option>
-              <option>Neither</option>
+              <option selected={driver.certification}>{titleCase(driver.certification)}</option>
+              <option>{certificationOptions[0]}</option>
+              <option>{certificationOptions[1]}</option>
+              <option>{certificationOptions[2]}</option>
             </select>
           </li>
           <li>
             <label>Citizenship: </label>
+            {/* <input defaultValue={driver.citizenship} onChange={(event) => {setCitizenship(event.target.value)}} /> */}
             <select name="citizenship" onChange={handleChange}>
-            <option selected={driver.citizenship}>{driver.citizenship}</option>
-              <option>Non Citizen</option>
-              <option>Work Permit</option>
+              <option selected={driver.citizenship}>{titleCase(driver.citizenship)}</option>
+              <option>{citizenOptions[0]}</option>
+              <option>{citizenOptions[1]}</option>
             </select>
           </li>
         </ul>

@@ -14,7 +14,7 @@ function AddTrailor() {
         inspection_current_date: '',
         inspection_expiry_date: '',
         manufacture_date: '',
-        vented: false,
+        vented: 'false',
         vin_number: null
     }
   const [trailor, setTrailor] = useState(initialTrailorInfo);
@@ -24,6 +24,7 @@ function AddTrailor() {
 
   const addTrailor = async (event) => {
       event.preventDefault();
+
       if (JSON.stringify(trailor) === JSON.stringify(initialTrailorInfo)) {
         console.log("No changes");
       } else {
@@ -62,6 +63,22 @@ function AddTrailor() {
     navigate('/dashboard');
   }
 
+  const checkVented = () => {
+    let ventedOptions = [];
+    switch(trailor.vented) {
+      case 'true':
+        ventedOptions = ['false'];
+        break; 
+      default:
+        ventedOptions = ['true'];
+        break;
+    }
+
+    return ventedOptions;
+  }
+
+  let ventedOptions = checkVented();
+
   return (
     <div>
       <h2>Add Trailor</h2>
@@ -96,9 +113,16 @@ function AddTrailor() {
             <label>Manufacture Date: </label>
             <input name='manufacture_date' type='text' value={trailor.manufacture_date} onChange={handleChange} />
           </li>
-          <li>
+          {/* <li>
             <label>Vented?: </label>
             <input name='vented' type='text' value={trailor.vented} onChange={handleChange} />
+          </li> */}
+          <li>
+            <label>Vented?: </label>
+            <select name="vented" onChange={handleChange}>
+              <option selected={trailor.vented}>{trailor.vented}</option>
+              <option>{ventedOptions[0]}</option>
+            </select>
           </li>
           <li>
             <label>Vin Number: </label>
