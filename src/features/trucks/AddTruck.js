@@ -70,7 +70,7 @@ function AddTruck() {
           <li>
             <label>Driver Assigned To: </label>
             {/* <input name='driver_assigned_to' type='text' value={truck.driver_assigned_to} onChange={handleChange}/> */}
-            <Search onDriverChange={handleDriverChange} />
+            <Search onDriverChange={handleDriverChange} value={truck.driver_assigned_to} />
           </li>
           <li>
             <label>Registration Current Date: </label>
@@ -110,4 +110,4 @@ function AddTruck() {
 
 }
 
-export default AddTruck
+export default AddTruck;

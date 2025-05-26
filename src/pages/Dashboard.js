@@ -12,6 +12,8 @@ function Dashboard() {
   const dispatch = useDispatch();
   const [drivers, setDrivers] = useState([]);
   const [trucks, setTrucks] = useState([]);
+  const [trailors, setTrailors] = useState([]);
+  const [loads, setLoads] = useState([]);
 
   const getDrivers = async () => {
     const querySnapshot = await getDocs(collection(db, "drivers"));
@@ -27,10 +29,18 @@ function Dashboard() {
     console.log(trucks)
   }
 
+  const getTrailors = async () => {
+    const querySnapshot = await getDocs(collection(db, "trailors"));
+    const trailors = querySnapshot.docs.map(doc => ({id: doc.id, ...doc.data()}))
+    setTrailors(trailors);
+    console.log(trailors)
+  }
+
   useEffect(() => {
     dispatch(login({name: auth.currentUser.displayName, email:auth.currentUser.email, uid: auth.currentUser.uid}))
     getDrivers();
     getTrucks();
+    getTrailors();
   }, [])
 
   const logout = () => {
@@ -53,6 +63,13 @@ function Dashboard() {
           return <p onClick={() => {
             navigate(`/truckinfo/${truck.id}`)
           }} key={truck.id}>{truck.truck_number}</p>
+        })}
+      </section>
+      <section>
+        {trailors.map((trailor) => {
+          return <p onClick={() => {
+            navigate(`/trailorinfo/${trailor.id}`)
+          }} key={trailor.id}>{trailor.trailor_number}</p>
         })}
       </section>
 

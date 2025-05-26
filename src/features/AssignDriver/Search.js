@@ -3,14 +3,13 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase';
 
-function Search({onDriverChange}) {
-  const [driver, setDriver] = useState('');
+function Search({onDriverChange, value}) {
   const [driversList, setDriversList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
 
   const handleChange = (event) => {
     event.preventDefault();
-    setDriver(event.target.value);
+    onDriverChange(event.target.value)
     results(event.target.value);
   }
 
@@ -31,9 +30,7 @@ function Search({onDriverChange}) {
       setFilteredList(newList);
     }
     
-    console.log(newList);  
-    console.log(driver);
-    onDriverChange(driver);
+    console.log(newList);
   }
 
   useEffect(() => {
@@ -43,11 +40,11 @@ function Search({onDriverChange}) {
   return (
     <div>
         <li>
-            <input name='driver_assigned_to' type='text' onChange={handleChange} value={driver}/>
+            <input name='driver_assigned_to' type='text' onChange={handleChange} value={value}/>
         </li>
         <section>
             {filteredList.map((x) => {
-            return <p onClick={() => setDriver(x.first_name)} key={x.id}>{x.first_name}</p>
+            return <p onClick={() => onDriverChange(x.first_name)} key={x.id}>{x.first_name}</p>
             })}
         </section>
     </div>

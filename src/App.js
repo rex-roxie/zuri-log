@@ -10,6 +10,8 @@ import DriverInfo from './features/drivers/DriverInfo';
 import AddDriver from './features/drivers/AddDriver';
 import AddTruck from './features/trucks/AddTruck';
 import TruckInfo from './features/trucks/TruckInfo';
+import TrailorInfo from './features/trailors/TrailorInfo';
+import AddTrailor from './features/trailors/AddTrailor';
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
         <Route path='/addDriver' element={<ProtectedRoute><AddDriver /></ProtectedRoute>} />
         <Route path='/truckinfo/:id' element={<ProtectedRoute><TruckInfo /></ProtectedRoute>} />
         <Route path='/addTruck' element={<ProtectedRoute><AddTruck /></ProtectedRoute>} />
+        <Route path='/trailorinfo/:id' element={<ProtectedRoute><TrailorInfo /></ProtectedRoute>} />
+        <Route path='/addTrailor' element={<ProtectedRoute><AddTrailor /></ProtectedRoute>} />
       </Routes>
       <AuthProvider />
     </div>

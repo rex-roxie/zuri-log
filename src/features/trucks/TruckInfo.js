@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { collection, getDocs, doc, getDoc, updateDoc, deleteDoc } from 'firebase/firestore';
 import { useParams, useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
+import Search from '../AssignDriver/Search';
 
 
 const titleCase = (str) => {
@@ -104,6 +105,12 @@ function TruckInfo() {
     })
   }
 
+  const handleDriverChange = (data) => {
+    console.log(data);
+    const name = 'driver_assigned_to';
+    setTruck(truck => ({...truck, [name]: data}));
+  }
+
   return (
     <div>
       <section style={{display: truckEditForm}}>
@@ -116,7 +123,8 @@ function TruckInfo() {
           </li>
           <li>
             <label>Driver Assigned To: </label>
-            <input name='driver_assigned_to' type='text' value={truck.driver_assigned_to} onChange={handleChange}/>
+            {/* <input name='driver_assigned_to' type='text' value={truck.driver_assigned_to} onChange={handleChange}/> */}
+            <Search onDriverChange={handleDriverChange} value={truck.driver_assigned_to}/>
           </li>
           <li>
             <label>Registration Current Date: </label>
