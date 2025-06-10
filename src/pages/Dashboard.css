@@ -1,0 +1,73 @@
+.dashboard {
+    width: 100%;
+    height: 100%;
+    background-color: #EFE4D2;
+    
+}
+
+h1 {
+    padding:1.5% 2%;
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
+main {
+    width: 90%;
+    height: 100%;
+}
+
+.lists {
+    width: 90%;
+    height: 85%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    align-items: stretch;
+    gap: 1rem;
+    margin-left: 2%;
+}
+
+.lists section {
+    background-color: #9EC6F3;
+    border-radius: 1rem;
+    padding: 4%;
+    overflow-y: hidden;
+}
+
+.lists section input {
+    outline: none;
+    border: none;
+    font-size: 0.9em;
+    position: relative;
+    left: 30%;
+    bottom: 13%;
+    padding: 1%;
+}
+
+.lists section div {
+    overflow-y: scroll;
+    height: 85%;
+    width: 100%;
+    /* padding: 0% 5%; */
+    position: relative;
+    -ms-overflow-style: none;
+    bottom: 5%;
+}
+
+.lists section div::-webkit-scrollbar {
+  display: none;
+}
+
+.lists section div p {
+    display: block;
+    margin: 2% 0%;
+    border-radius: 0.5rem;
+    padding: 1%;
+    padding-left: 3%;
+    width: 70%;
+    background-color: #EAEFEF;
+}
+
+.lists section div p:hover {
+    cursor: pointer;
+    font-size: 1rem;
+}

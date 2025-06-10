@@ -1,0 +1,162 @@
+/* .nav {
+    background-color: blue;
+    width: 15%;
+    height: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+} */
+
+nav {
+    width: var(--nav-width);
+    height: 100%;
+    background-color: blue;
+    position: fixed;
+    animation: 2s linear slideleft;
+    transition: linear 400ms width 200ms;
+    z-index: 200;
+}
+
+nav:hover {
+    --nav-width: 20%;
+    width: var(--nav-width);
+}
+
+nav:hover::after ul{
+    opacity: 1;
+    transition: ease-in 400ms opacity 500ms;
+}
+
+nav:hover ul {
+    opacity: 1;
+    transition: ease-in 400ms opacity 500ms;
+}
+
+nav ul {
+    width: 100%;
+    opacity: 0;
+    transition: ease-in 400ms opacity;
+}
+
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    width: 80%;
+    color: white;
+    text-decoration: none;
+    padding: 5%;
+    font-size: 1.2rem;
+    border-radius: 1%;
+    margin-top: 1%;
+    cursor: pointer;
+}
+
+nav ul li:hover {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+nav ul li:visited {
+    display: none;
+}
+
+nav ul li p {
+    padding-left: 5%;
+}
+
+nav i {
+    color: white;
+    font-size: 1.2rem;
+    padding-right: 5%;
+    position: absolute;
+    padding-left: 25%;
+    opacity: 1;
+    transition: ease-in 400ms padding-left 500ms;
+}
+
+nav:hover i {
+    color: white;
+    font-size: 1.2rem;
+    padding-right: 5%;
+    position: absolute;
+    padding-left: 10%;
+    opacity: 1;
+}
+
+nav:hover i:hover {
+    cursor: pointer;
+}
+
+/* nav i:hover ~ ul li {
+    background-color: rgba(0, 0, 0, 0.3);
+} */
+
+.fa-house-chimney {
+    top: 15.2%;
+}
+
+.fa-id-card {
+    top: 23.9%;
+}
+
+.fa-caravan {
+    top: 32.5%;
+}
+
+.fa-truck-ramp-box {
+    top: 41%;
+}
+
+.fa-truck {
+    top: 49.6%;
+}
+
+.fa-arrow-right-from-bracket {
+    top: 88.7%;
+    padding-left: 27%;
+}
+
+nav li {
+    list-style: none;
+    width: 100%;
+    margin-left: 5%;
+}
+
+nav h3 {
+    padding: 10%;
+    color: white;
+    font-size: 1.1rem;
+    /* margin-left: 5%; */
+    line-height: 1.5rem;
+    /* margin-bottom: 10%; */
+    opacity: 0;
+    transition: ease-in 400ms opacity;
+    font-family: 'Montserrat Alternates', sans-serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+nav:hover h3 {
+    opacity: 1;
+    transition: ease-in 400ms opacity 500ms;
+}
+
+nav:hover::after h3{
+    opacity: 1;
+    transition: ease-in 400ms opacity 500ms;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+nav .logout {
+    margin-top: 70%;
+}
+
+nav ul li p {
+    margin-left: 10%;
+}

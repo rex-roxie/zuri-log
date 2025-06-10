@@ -16,7 +16,7 @@ const titleCase = (str) => {
 function TruckInfo() {
   const [initialTruckInfo, setInitialTruckInfo] = useState({});
   const [truck, setTruck] = useState({});
-  const [truckEditForm, setTruckEditForm] = useState('block');
+  const [truckEditForm, setTruckEditForm] = useState('flex');
   const [deleteTruckForm, setDeleteTruckForm] = useState('none');
 
   const navigate = useNavigate();
@@ -93,7 +93,7 @@ function TruckInfo() {
   }
 
   const cancelDeletion = () => {
-    setTruckEditForm('block');
+    setTruckEditForm('flex');
     setDeleteTruckForm('none');
   }
 
@@ -112,7 +112,7 @@ function TruckInfo() {
   }
 
   return (
-    <div>
+    <div className='forms'>
       <section style={{display: truckEditForm}}>
         <h2>{truck.vin_number}</h2>
         <form onSubmit={editTruck}>
@@ -156,12 +156,14 @@ function TruckInfo() {
               </select>
             </li> */}
           </ul>
-          <button type='submit' onClick={editTruck}>Edit Truck</button>
-          <button type='button' onClick={cancel}>Cancel</button>
-          <button type='button' onClick={deleteConfirmation}>Delete Truck</button>
+          <div className='buttons'>
+            <button type='submit' onClick={editTruck}>Edit Truck</button>
+            <button type='button' onClick={cancel}>Cancel</button>
+            <button type='button' onClick={deleteConfirmation}>Delete Truck</button>
+          </div>
         </form>
       </section>
-      <section style={{display: deleteTruckForm}}>
+      <section style={{display: deleteTruckForm}} className='deleteConfirmation'>
         <h2>Are you sure you want to delete the truck?</h2>
         <button onClick={deleteTruck}>Yes</button>
         <button onClick={cancelDeletion}>No</button>

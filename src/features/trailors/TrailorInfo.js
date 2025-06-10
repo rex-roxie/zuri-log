@@ -16,7 +16,7 @@ const titleCase = (str) => {
 function TrailorInfo() {
   const [initialTrailorInfo, setInitialTrailorInfo] = useState({});
   const [trailor, setTrailor] = useState({});
-  const [trailorEditForm, setTrailorEditForm] = useState('block');
+  const [trailorEditForm, setTrailorEditForm] = useState('flex');
   const [deleteTrailorForm, setDeleteTrailorForm] = useState('none');
 
   const navigate = useNavigate();
@@ -75,7 +75,7 @@ function TrailorInfo() {
   }
 
   const cancelDeletion = () => {
-    setTrailorEditForm('block');
+    setTrailorEditForm('flex');
     setDeleteTrailorForm('none');
   }
 
@@ -94,7 +94,7 @@ function TrailorInfo() {
   }
 
   return (
-    <div>
+    <div className='forms'>
       <section style={{display: trailorEditForm}}>
         <h2>{trailor.vin_number}</h2>
         <form onSubmit={editTrailor}>
@@ -136,12 +136,14 @@ function TrailorInfo() {
                 <input name='vin_number' type='text' value={trailor.vin_number} onChange={handleChange} />
             </li>
           </ul>
-          <button type='submit' onClick={editTrailor}>Edit Trailor</button>
-          <button type='button' onClick={cancel}>Cancel</button>
-          <button type='button' onClick={deleteConfirmation}>Delete Trailor</button>
+          <div className='buttons'>
+            <button type='submit' onClick={editTrailor}>Edit Trailor</button>
+            <button type='button' onClick={cancel}>Cancel</button>
+            <button type='button' onClick={deleteConfirmation}>Delete Trailor</button>
+          </div>
         </form>
       </section>
-      <section style={{display: deleteTrailorForm}}>
+      <section style={{display: deleteTrailorForm}} className='deleteConfirmation'>
         <h2>Are you sure you want to delete the trailor?</h2>
         <button onClick={deleteTrailor}>Yes</button>
         <button onClick={cancelDeletion}>No</button>

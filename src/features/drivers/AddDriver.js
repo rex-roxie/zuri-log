@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
+import './AddDriver.css';
 
 const titleCase = (str) => {
   if (!str) return false;
@@ -107,7 +108,7 @@ function AddDriver() {
   let certificationOptions = checkCertification();
 
   return (
-    <div>
+    <div className='forms'>
       <h2>Add Driver</h2>
       <form onSubmit={addDriver}>
         <ul>
@@ -166,8 +167,11 @@ function AddDriver() {
             </select>
           </li>
         </ul>
-        <button type='submit' onClick={addDriver}>Add Driver</button>
-        <button type='button' onClick={cancel}>Cancel</button>
+        <div className='buttons'>
+          <button type='submit' onClick={addDriver}>Add Driver</button>
+          <button type='button' onClick={cancel}>Cancel</button>
+        </div>
+        
       </form>
     </div>
   )

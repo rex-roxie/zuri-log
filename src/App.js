@@ -14,6 +14,7 @@ import TrailorInfo from './features/trailors/TrailorInfo';
 import AddTrailor from './features/trailors/AddTrailor';
 import AddLoad from './features/loads/AddLoad';
 import LoadInfo from './features/loads/LoadInfo';
+import Nav from './features/NavBar/Nav';
 
 function App() {
   return (

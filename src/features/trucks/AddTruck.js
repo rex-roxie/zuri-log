@@ -59,7 +59,7 @@ function AddTruck() {
   }
 
   return (
-    <div>
+    <div className='forms'>
       <h2>Add Truck</h2>
       <form onSubmit={addTruck}>
         <ul>
@@ -102,8 +102,11 @@ function AddTruck() {
             </select>
           </li> */}
         </ul>
-        <button type='submit' onClick={addTruck}>Add Truck</button>
-        <button type='button' onClick={cancel}>Cancel</button>
+        <div className='buttons'>
+          <button type='submit' onClick={addTruck}>Add Truck</button>
+          <button type='button' onClick={cancel}>Cancel</button>
+        </div>
+        
       </form>
     </div>
   )

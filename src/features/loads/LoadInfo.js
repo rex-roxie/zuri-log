@@ -16,7 +16,7 @@ const titleCase = (str) => {
 function LoadInfo() {
   const [initialLoadInfo, setInitialLoadInfo] = useState({});
   const [load, setLoad] = useState({});
-  const [loadEditForm, setLoadEditForm] = useState('block');
+  const [loadEditForm, setLoadEditForm] = useState('flex');
   const [deleteLoadForm, setDeleteLoadForm] = useState('none');
 
   const navigate = useNavigate();
@@ -71,7 +71,7 @@ function LoadInfo() {
   }
 
   const cancelDeletion = () => {
-    setLoadEditForm('block');
+    setLoadEditForm('flex');
     setDeleteLoadForm('none');
   }
 
@@ -90,9 +90,9 @@ function LoadInfo() {
   }
 
   return (
-    <div>
+    <div className='forms'>
       <section style={{display: loadEditForm}}>
-        <h2>{load.vin_number}</h2>
+        <h2>{load.load_number}</h2>
         <form onSubmit={editLoad}>
           <ul>
             <li>
@@ -116,12 +116,14 @@ function LoadInfo() {
                 <input name='dropoff_location' type='text' value={load.dropoff_location || ""} onChange={handleChange} />
             </li>
           </ul>
-          <button type='submit' onClick={editLoad}>Edit Load</button>
-          <button type='button' onClick={cancel}>Cancel</button>
-          <button type='button' onClick={deleteConfirmation}>Delete Load</button>
+          <div className='buttons'>
+            <button type='submit' onClick={editLoad}>Edit Load</button>
+            <button type='button' onClick={cancel}>Cancel</button>
+            <button type='button' onClick={deleteConfirmation}>Delete Load</button>
+          </div>
         </form>
       </section>
-      <section style={{display: deleteLoadForm}}>
+      <section style={{display: deleteLoadForm}} className='deleteConfirmation'>
         <h2>Are you sure you want to delete the load?</h2>
         <button onClick={deleteLoad}>Yes</button>
         <button onClick={cancelDeletion}>No</button>

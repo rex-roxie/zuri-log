@@ -55,7 +55,7 @@ function AddLoad() {
   }
 
   return (
-    <div>
+    <div className='forms'>
       <h2>Add Load</h2>
       <form onSubmit={addLoad}>
         <ul>
@@ -81,8 +81,10 @@ function AddLoad() {
             <input name='dropoff_location' type='text' value={load.dropoff_location} onChange={handleChange} />
           </li>
         </ul>
-        <button type='submit' onClick={addLoad}>Add Load</button>
-        <button type='button' onClick={cancel}>Cancel</button>
+        <div className='buttons'>
+          <button type='submit' onClick={addLoad}>Add Load</button>
+          <button type='button' onClick={cancel}>Cancel</button>
+        </div>
       </form>
     </div>
   )

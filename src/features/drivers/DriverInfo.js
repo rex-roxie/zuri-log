@@ -15,7 +15,7 @@ const titleCase = (str) => {
 function DriverInfo() {
   const [initialDriverInfo, setInitialDriverInfo] = useState({});
   const [driver, setDriver] = useState({});
-  const [driverEditForm, setDriverEditForm] = useState('block');
+  const [driverEditForm, setDriverEditForm] = useState('flex');
   const [deleteDriverForm, setDeleteDriverForm] = useState('none');
 
   const navigate = useNavigate();
@@ -113,7 +113,7 @@ function DriverInfo() {
   }
 
   const cancelDeletion = () => {
-    setDriverEditForm('block');
+    setDriverEditForm('flex');
     setDeleteDriverForm('none');
   }
 
@@ -126,7 +126,7 @@ function DriverInfo() {
   }
 
   return (
-    <div>
+    <div className='forms'>
       <section style={{display: driverEditForm}}>
         <h2>{driver.first_name} {driver.last_name}</h2>
         <form onSubmit={editDriver}>
@@ -178,12 +178,14 @@ function DriverInfo() {
               </select>
             </li>
           </ul>
-          <button type='submit' onClick={editDriver}>Edit Driver</button>
-          <button type='button' onClick={cancel}>Cancel</button>
-          <button type='button' onClick={deleteConfirmation}>Delete Driver</button>
+          <div className='buttons'>
+            <button type='submit' onClick={editDriver}>Edit Driver</button>
+            <button type='button' onClick={cancel}>Cancel</button>
+            <button type='button' onClick={deleteConfirmation}>Delete Driver</button>
+          </div>
         </form>
       </section>
-      <section style={{display: deleteDriverForm}}>
+      <section style={{display: deleteDriverForm}} className='deleteConfirmation'>
         <h2>Are you sure you want to delete the driver?</h2>
         <button onClick={deleteDriver}>Yes</button>
         <button onClick={cancelDeletion}>No</button>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
+import './SignIn.css';
 
 function Login() {
 
@@ -54,12 +55,15 @@ function Login() {
 
 
   return (
-    <div>
+    <div className='login'>
         <form method='post' onSubmit={handleSubmit}>
-            <input name='email' type='email' placeholder='email' onChange={changeEmail} />
-            <input name='password' type='password' placeholder='password' onChange={changePassword} />
-            <button type='submit'>Login</button>
-            <p>{error}</p>
+          <h1>Sign In</h1>
+          <section className='login-inputs'>
+            <input name='email' type='email' placeholder='Email' onChange={changeEmail} />
+            <input name='password' type='password' placeholder='Password' onChange={changePassword} />
+          </section>
+          <button type='submit'>Sign In</button>
+          <p>{error}</p>
         </form>
     </div>
   )

@@ -80,7 +80,7 @@ function AddTrailor() {
   let ventedOptions = checkVented();
 
   return (
-    <div>
+    <div className='forms'>
       <h2>Add Trailor</h2>
       <form onSubmit={addTrailor}>
         <ul>
@@ -129,8 +129,11 @@ function AddTrailor() {
             <input name='vin_number' type='text' value={trailor.vin_number} onChange={handleChange} />
           </li>
         </ul>
-        <button type='submit' onClick={addTrailor}>Add Trailor</button>
-        <button type='button' onClick={cancel}>Cancel</button>
+        <div className='buttons'>
+          <button type='submit' onClick={addTrailor}>Add Trailor</button>
+          <button type='button' onClick={cancel}>Cancel</button>
+        </div>
+        
       </form>
     </div>
   )
